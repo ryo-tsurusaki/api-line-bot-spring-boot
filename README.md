@@ -1,6 +1,9 @@
 # api-line-bot-spring-boot
 LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返却するAPI。
 
+<img width="370" alt="image" src="https://github.com/ryo-tsurusaki/api-line-bot-spring-boot/assets/136481507/48880f02-9dde-4c8f-be44-4b00978ab1e3">
+
+
 ### package構成
 
 | package        | ディレクトリ      | 説明                                     |
