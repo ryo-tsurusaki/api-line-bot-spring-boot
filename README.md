@@ -37,10 +37,10 @@ $ ./gradlew build
 $ java -jar {jarファイル}
 
 // Image作成
-$ docker build -t tsurusaki/api-spring-boot .
+$ docker build -t tsurusaki/api-line-bot-spring-boot .
 
 // Image実行
-$ docker run -p 8080:8080 tsurusaki/api-spring-boot
+$ docker run -p 8080:8080 tsurusaki/api-line-bot-spring-boot
 ```
 
 App Runner デプロイ時に参考にした<br>
