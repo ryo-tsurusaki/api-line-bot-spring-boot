@@ -3,7 +3,6 @@ config:
     url: https://api.openai.com/v1/chat/completions
     api-key: ${OPEN_AI_KEY}
     model: gpt-3.5-turbo
-    message: "{\"role\": \"system\", \"content\": \"返答は日本語で\"},{\"role\": \"user\", \"content\": \" + preMessage + \"}"
 
 line:
   bot:

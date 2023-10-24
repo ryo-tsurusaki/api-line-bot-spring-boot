@@ -12,5 +12,4 @@ public class OpenAiChatConfig {
     private String url;
     private String apiKey;
     private String model;
-    private String message;
 }

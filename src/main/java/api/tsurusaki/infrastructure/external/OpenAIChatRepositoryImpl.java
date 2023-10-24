@@ -27,6 +27,7 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
     public String openAiChat(String messageText) {
 
         String content =  "";
+        String message = "{\"role\": \"system\", \"content\": \"返答は日本語で\"},{\"role\": \"user\", \"content\": \" "+ messageText +" \"}";
 
         try {
             // HTTPリクエストの作成
@@ -39,7 +40,7 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
 
             // リクエストの送信
             OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
-            out.write("{\"model\": \"" + this.openAiChatConfig.getModel() + "\", \"messages\": [" + this.openAiChatConfig.getMessage() + "]}");
+            out.write("{\"model\": \"" + this.openAiChatConfig.getModel() + "\", \"messages\": [" + message + "]}");
             out.close();
 
             // レスポンスの取得
@@ -51,9 +52,8 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
             content = messageObject.get("content").getAsString();
 
             // レスポンスの出力
-            System.out.println(content);
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return content;
     }
