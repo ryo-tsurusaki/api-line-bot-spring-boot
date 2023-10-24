@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class OpenAiChatConfig {
 
-    private String url;
     private String apiKey;
     private String model;
+    private String url;
 }

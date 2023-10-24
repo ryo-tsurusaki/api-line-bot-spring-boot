@@ -1,4 +1,5 @@
-# api
+# api-line-bot-spring-boot
+LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返却するAPI。
 
 ### package構成
 
@@ -18,30 +19,20 @@
 |                | security    | 認証関連やCSRFトークンなどの処理                     |
 |                | interceptor | コントローラー共通処理                            |
 
-### 以下は未整理
+### 起動時に必要な環境変数
+| name                    | value                      |
+|-------------------------|----------------------------|
+| OPEN_AI_KEY             | OpenAIのAPIKey              |
+| LINE_BOT_CHANNEL_TOKEN  | LineDevelopersのチャンネルトークン   |
+| LINE_BOT_CHANNEL_SECRET | LineDevelopersのチャンネルシークレット |
 
-AWS App Runnerのチュートリアル
-https://aws.amazon.com/jp/builders-flash/202303/spring-boot-app-with-apprunner-cdk/?awsf.filter-name=*all
+### 参考にさせていただいたサイト
 
+- line-bot-sdk-java<br>
+  https://github.com/line/line-bot-sdk-java
 
-コマンド
+- OpenAI接続<br>
+  https://qiita.com/sasakitomopi/items/38c01447715bbb409c66
 
-```
-// 実行
-$ ./gradlew bootRun
-
-// ビルド
-$ ./gradlew build
-
-// Jar実行
-$ java -jar {jarファイル}
-
-// Image作成
-$ docker build -t tsurusaki/api-line-bot-spring-boot .
-
-// Image実行
-$ docker run -p 8080:8080 tsurusaki/api-line-bot-spring-boot
-```
-
-App Runner デプロイ時に参考にした<br>
-https://aws.amazon.com/jp/builders-flash/202303/spring-boot-app-with-apprunner-cdk/?awsf.filter-name=*all
+- AppRunnerデプロイ<br>
+  https://aws.amazon.com/jp/builders-flash/202303/spring-boot-app-with-apprunner-cdk/?awsf.filter-name=*all

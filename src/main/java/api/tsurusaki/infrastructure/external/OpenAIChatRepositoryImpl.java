@@ -2,17 +2,16 @@ package api.tsurusaki.infrastructure.external;
 
 import api.tsurusaki.domain.repository.OpenAIChatRepository;
 import api.tsurusaki.domain.value.OpenAiChatConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
