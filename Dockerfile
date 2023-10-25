@@ -5,5 +5,5 @@ RUN ./gradlew build
 
 FROM openjdk:11-jre-slim
 WORKDIR /app
-COPY --from=builder /app/build/libs/api-0.1-SNAPSHOT.jar ./api.jar
+COPY --from=builder /app/build/libs/lineBot-0.1-SNAPSHOT.jar ./api.jar
 ENTRYPOINT ["java", "-jar", "api.jar"]
