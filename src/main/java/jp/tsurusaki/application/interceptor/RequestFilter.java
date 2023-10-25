@@ -1,4 +1,4 @@
-package api.tsurusaki.presentation.interceptor;
+package jp.tsurusaki.application.interceptor;
 
 import java.io.IOException;
 import java.util.UUID;

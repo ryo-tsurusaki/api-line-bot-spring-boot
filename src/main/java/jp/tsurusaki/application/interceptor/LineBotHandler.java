@@ -1,6 +1,6 @@
-package api.tsurusaki.presentation.controller;
+package jp.tsurusaki.application.interceptor;
 
-import api.tsurusaki.domain.service.OpenAiChatService;
+import jp.tsurusaki.domain.service.OpenAiChatService;
 import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
@@ -8,9 +8,11 @@ import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @LineMessageHandler
+@Slf4j
 public class LineBotHandler {
 
     @Autowired
@@ -18,6 +20,7 @@ public class LineBotHandler {
 
     @EventMapping
     public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+
         String originalMessageText = event.getMessage().getText();
         String replyMessageText = this.openAiChatService.openAiChat(originalMessageText);
         return new TextMessage(replyMessageText);
@@ -25,6 +28,7 @@ public class LineBotHandler {
 
     @EventMapping
     public void handleDefaultMessageEvent(Event event) {
-        System.out.println("event: " + event);
+
+        log.info("event: " + event);
     }
 }

@@ -1,23 +1,22 @@
-# api-line-bot-spring-boot
+# line-bot
 LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返却するAPI。
 
 ### package構成
 
 | package        | ディレクトリ      | 説明                                     |
 |----------------|-------------|----------------------------------------|
-| application    | service     | ApplicationService                     |
-|                | shared      | サービス間で使いたいサービス                         |
+| application    | controller  | Controller                             |
+|                | interceptor | コントローラー共通処理                            |
+|                | resource    | パラメータなど                                |
+|                | security    | 認証関連やCSRFトークンなどの処理                     |
 | domain         | model       | 値オブジェクトなどを格納したオブジェクト                   |
 |                | repository  | インターフェース                               |
 |                | service     | DomainService                          |
-|                | value       | 値オブジェクトや区分オブジェクト                       |
 | infrastructure | composite   | 複数のdatasourceやexternalの結果を結合したりする場合に使用 |
+|                | config      | 設定ファイル                                 |
 |                | datasource  | DBなど                                   |
 |                | external    | 外部APIなど                                |
 |                | transfer    | 外部ストレージなど                              |
-| presentation   | controller  | Controller                             |
-|                | security    | 認証関連やCSRFトークンなどの処理                     |
-|                | interceptor | コントローラー共通処理                            |
 
 ### 起動時に必要な環境変数
 | name                    | value                      |

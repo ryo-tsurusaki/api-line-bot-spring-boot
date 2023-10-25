@@ -1,4 +1,4 @@
-package api.tsurusaki;
+package jp.tsurusaki;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;

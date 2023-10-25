@@ -1,6 +1,6 @@
-package api.tsurusaki.presentation.controller;
+package jp.tsurusaki.application.controller;
 
-import api.tsurusaki.domain.service.OpenAiChatService;
+import jp.tsurusaki.domain.service.OpenAiChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

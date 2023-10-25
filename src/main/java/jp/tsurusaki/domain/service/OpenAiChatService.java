@@ -1,9 +1,11 @@
-package api.tsurusaki.domain.service;
+package jp.tsurusaki.domain.service;
 
-import api.tsurusaki.domain.repository.OpenAIChatRepository;
+import jp.tsurusaki.domain.repository.OpenAIChatRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class OpenAiChatService {
 
@@ -17,6 +19,6 @@ public class OpenAiChatService {
      */
     public String openAiChat(String messageText) {
 
-        return this.openAIChatRepository.openAiChat(messageText);
+        return this.openAIChatRepository.openAiChat(messageText).getContent();
     }
 }
