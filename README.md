@@ -1,4 +1,4 @@
-# line-bot
+# line-bot-api
 LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返却するAPI。
 
 以下は、LINE Developersのチャンネル設定・OpenAIの利用登録・AWS App Runnerにデプロイし、Lineメッセージを送ったレスポンスサンプル。
