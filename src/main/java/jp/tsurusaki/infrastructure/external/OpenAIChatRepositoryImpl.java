@@ -51,6 +51,12 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
     }
   }
 
+  /**
+   * send open AI request.
+   * @param message message string.
+   * @return response BufferedReader object.
+   * @throws IOException internal server error.
+   */
   private BufferedReader sendRequest(String message) throws IOException {
     URL obj = new URL(this.openAiChatConfig.getUrl());
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -60,12 +66,13 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
         "Bearer " + this.openAiChatConfig.getApiKey());
     con.setDoOutput(true);
 
-    OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
-    out.write("{\"model\": \"" + this.openAiChatConfig.getModel()
-        + "\", \"messages\": [" + message + "]}");
-    out.close();
-
-    // TODO OutputStreamWriterをクローズする
+    try (OutputStreamWriter out
+             = new OutputStreamWriter(con.getOutputStream())) {
+      out.write("{\"model\": \"" + this.openAiChatConfig.getModel()
+          + "\", \"messages\": [" + message + "]}");
+    } catch (IOException exception) {
+      throw new RuntimeException(exception);
+    }
 
     return new BufferedReader(new InputStreamReader(con.getInputStream()));
   }
