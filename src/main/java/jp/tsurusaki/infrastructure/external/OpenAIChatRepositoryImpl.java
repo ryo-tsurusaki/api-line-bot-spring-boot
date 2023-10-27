@@ -51,48 +51,22 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
     }
   }
 
-  /**
-   * send OpenAI request.
-   *
-   * @param message message string.
-   * @return response stream.
-   */
-  private BufferedReader sendRequest(String message) {
+  private BufferedReader sendRequest(String message) throws IOException {
+    URL obj = new URL(this.openAiChatConfig.getUrl());
+    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    con.setRequestMethod("POST");
+    con.setRequestProperty("Content-Type", "application/json");
+    con.setRequestProperty("Authorization",
+        "Bearer " + this.openAiChatConfig.getApiKey());
+    con.setDoOutput(true);
 
-    HttpURLConnection httpURLConnection = this.getHttpURLConnection();
+    OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
+    out.write("{\"model\": \"" + this.openAiChatConfig.getModel() +
+        "\", \"messages\": [" + message + "]}");
+    out.close();
 
-    try (OutputStreamWriter out = new OutputStreamWriter(
-        httpURLConnection.getOutputStream())) {
+    // TODO OutputStreamWriterをクローズする
 
-      out.write("{\"model\": \"" + this.openAiChatConfig.getModel()
-          + "\", \"messages\": [" + message + "]}");
-      return new BufferedReader(
-          new InputStreamReader(httpURLConnection.getInputStream()));
-
-    } catch (Exception exception) {
-      throw new RuntimeException(exception);
-    }
-  }
-
-  /**
-   * get httpUrlConnection
-   *
-   * @return HttpURLConnection object.
-   */
-  private HttpURLConnection getHttpURLConnection() {
-
-    try {
-      URL url = new URL(this.openAiChatConfig.getUrl());
-      HttpURLConnection httpURLConnection =
-          (HttpURLConnection) url.openConnection();
-      httpURLConnection.setRequestMethod("POST");
-      httpURLConnection.setRequestProperty("Content-Type", "application/json");
-      httpURLConnection.setRequestProperty("Authorization",
-          "Bearer " + this.openAiChatConfig.getApiKey());
-      httpURLConnection.setDoOutput(true);
-      return httpURLConnection;
-    } catch (IOException exception) {
-      throw new RuntimeException(exception);
-    }
+    return new BufferedReader(new InputStreamReader(con.getInputStream()));
   }
 }
