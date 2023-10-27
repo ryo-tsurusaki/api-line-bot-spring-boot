@@ -27,64 +27,64 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class OpenAiChatControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @MockBean
-    OpenAiChatService openAiChatService;
+  @MockBean
+  private OpenAiChatService openAiChatService;
 
-    @DisplayName("/openAiChat")
-    @Nested
-    class OpenAiChatTest {
+  @DisplayName("/openAiChat")
+  @Nested
+  class OpenAiChatTest {
 
-        private final String PATH = "/openAiChat";
+    private final String PATH = "/openAiChat";
 
-        @DisplayName("200（正常系）")
-        @Test
-        void ok() throws Exception {
+    @DisplayName("200（正常系）")
+    @Test
+    void ok() throws Exception {
 
-            String messageText = "リクエスト";
-            String expected = "レスポンス";
+      String messageText = "リクエスト";
+      String expected = "レスポンス";
 
-            when(openAiChatService.openAiChat(messageText)).thenReturn(expected);
+      when(openAiChatService.openAiChat(messageText)).thenReturn(expected);
 
-            String path = this.PATH.concat("?message_text=").concat(messageText);
+      String path = this.PATH.concat("?message_text=").concat(messageText);
 
-            MvcResult result = mockMvc.perform(
-                    MockMvcRequestBuilders
-                            .get(path))
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType("text/plain;charset=UTF-8"))
-                    .andReturn();
+      MvcResult result = mockMvc.perform(
+              MockMvcRequestBuilders
+                  .get(path))
+          .andExpect(status().isOk())
+          .andExpect(content().contentType("text/plain;charset=UTF-8"))
+          .andReturn();
 
-            String actual = result.getResponse().getContentAsString();
-            assertThat(actual).isEqualTo(expected);
-            verify(openAiChatService, times(1)).openAiChat(messageText);
-        }
-
-        @DisplayName("500（異常系）")
-        @Test
-        void internalServerError() throws Exception {
-
-            String messageText = "リクエスト";
-
-            doThrow(new RuntimeException("エラー"))
-                    .when(openAiChatService).openAiChat(anyString());
-
-            String path = this.PATH.concat("?message_text=").concat(messageText);
-
-            mockMvc.perform(
-                            MockMvcRequestBuilders
-                                    .get(path))
-                    .andExpect(status().isInternalServerError())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                    .andReturn();
-
-            assertThatThrownBy(() -> {
-                throw new RuntimeException("エラー");
-            });
-
-            verify(openAiChatService, times(1)).openAiChat(anyString());
-        }
+      String actual = result.getResponse().getContentAsString();
+      assertThat(actual).isEqualTo(expected);
+      verify(openAiChatService, times(1)).openAiChat(messageText);
     }
+
+    @DisplayName("500（異常系）")
+    @Test
+    void internalServerError() throws Exception {
+
+      String messageText = "リクエスト";
+
+      doThrow(new RuntimeException("エラー"))
+          .when(openAiChatService).openAiChat(anyString());
+
+      String path = this.PATH.concat("?message_text=").concat(messageText);
+
+      mockMvc.perform(
+              MockMvcRequestBuilders
+                  .get(path))
+          .andExpect(status().isInternalServerError())
+          .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+          .andReturn();
+
+      assertThatThrownBy(() -> {
+        throw new RuntimeException("エラー");
+      });
+
+      verify(openAiChatService, times(1)).openAiChat(anyString());
+    }
+  }
 }

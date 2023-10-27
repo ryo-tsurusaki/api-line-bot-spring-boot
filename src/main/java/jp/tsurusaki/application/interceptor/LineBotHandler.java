@@ -15,20 +15,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class LineBotHandler {
 
-    @Autowired
-    private OpenAiChatService openAiChatService;
+  @Autowired
+  private OpenAiChatService openAiChatService;
 
-    @EventMapping
-    public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+  /**
+   * handle text message event.
+   * @param event MessageEvent object.
+   * @return Message object.
+   */
+  @EventMapping
+  public Message handleTextMessageEvent(
+      MessageEvent<TextMessageContent> event) {
 
-        String originalMessageText = event.getMessage().getText();
-        String replyMessageText = this.openAiChatService.openAiChat(originalMessageText);
-        return new TextMessage(replyMessageText);
-    }
+    String originalMessageText = event.getMessage().getText();
+    String replyMessageText = this.openAiChatService
+        .openAiChat(originalMessageText);
 
-    @EventMapping
-    public void handleDefaultMessageEvent(Event event) {
+    return new TextMessage(replyMessageText);
+  }
 
-        log.info("event: " + event);
-    }
+  /**
+   * handle default message event.
+   * @param event Event object.
+   */
+  @EventMapping
+  public void handleDefaultMessageEvent(Event event) {
+
+    log.info("event: " + event);
+  }
 }

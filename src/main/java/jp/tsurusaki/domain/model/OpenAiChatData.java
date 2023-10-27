@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class OpenAiChatData {
 
-    private String content;
+  private String content;
 }

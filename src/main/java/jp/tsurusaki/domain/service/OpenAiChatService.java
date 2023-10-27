@@ -9,16 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAiChatService {
 
-    @Autowired
-    private OpenAIChatRepository openAIChatRepository;
+  @Autowired
+  private OpenAIChatRepository openAIChatRepository;
 
-    /**
-     * openAiChat
-     * @param messageText request message text.
-     * @return reply message text.
-     */
-    public String openAiChat(String messageText) {
+  /**
+   * openAiChat
+   *
+   * @param messageText request message text.
+   * @return reply message text.
+   */
+  public String openAiChat(String messageText) {
 
-        return this.openAIChatRepository.openAiChat(messageText).getContent();
-    }
+    return this.openAIChatRepository.openAiChat(messageText).getContent();
+  }
 }

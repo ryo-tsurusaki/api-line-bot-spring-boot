@@ -14,19 +14,22 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class RequestFilter extends OncePerRequestFilter {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        String uuId = UUID.randomUUID().toString();
-        MDC.put("uuId", uuId);
-        request.setAttribute("uuId", uuId);
-        try {
-            filterChain.doFilter(request, response);
-        } finally {
-            MDC.clear();
-        }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doFilterInternal(
+      HttpServletRequest request, HttpServletResponse response,
+      FilterChain filterChain)
+      throws ServletException, IOException {
+
+    String uuId = UUID.randomUUID().toString();
+    MDC.put("uuId", uuId);
+    request.setAttribute("uuId", uuId);
+    try {
+      filterChain.doFilter(request, response);
+    } finally {
+      MDC.clear();
     }
+  }
 }

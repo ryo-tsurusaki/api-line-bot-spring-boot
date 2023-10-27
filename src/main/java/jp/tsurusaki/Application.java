@@ -6,7 +6,11 @@ import org.springframework.boot.SpringApplication;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+  /**
+   * Starter Spring Boot Application.
+   * @param args strings.
+   */
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }

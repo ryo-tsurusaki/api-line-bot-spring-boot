@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OpenAiChatController {
 
-    @Autowired
-    private OpenAiChatService openAiChatService;
+  @Autowired
+  private OpenAiChatService openAiChatService;
 
-    @GetMapping("/openAiChat")
-    public ResponseEntity<String> openAiChat(@RequestParam(name = "message_text")String messageText) {
+  /**
+   * openAiChat
+   * @param messageText message string.
+   * @return open AI chat response string.
+   */
+  @GetMapping("/openAiChat")
+  public ResponseEntity<String> openAiChat(
+      @RequestParam(name = "message_text") String messageText) {
 
-        return ResponseEntity.ok(this.openAiChatService.openAiChat(messageText));
-    }
+    return ResponseEntity.ok(this.openAiChatService.openAiChat(messageText));
+  }
 }

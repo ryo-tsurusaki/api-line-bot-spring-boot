@@ -6,31 +6,34 @@ import lombok.Getter;
 @Getter
 public class ErrorResponse {
 
-    /**
-     * constructor of ErrorResponse.
-     * @param timestamp timestamp string.
-     * @param code code
-     * @param uuId UUID
-     * @param message message string.
-     */
-    public ErrorResponse(String timestamp, int code, String uuId, String message) {
-        this.error = ErrorData.builder()
-                .timestamp(timestamp)
-                .code(code)
-                .uuId(uuId)
-                .message(message)
-                .build();
-    }
+  /**
+   * constructor of ErrorResponse.
+   *
+   * @param timestamp timestamp string.
+   * @param code      code
+   * @param uuId      UUID
+   * @param message   message string.
+   */
+  public ErrorResponse(String timestamp, int code, String uuId,
+                       String message) {
 
-    private final ErrorData error;
+    this.error = ErrorData.builder()
+        .timestamp(timestamp)
+        .code(code)
+        .uuId(uuId)
+        .message(message)
+        .build();
+  }
 
-    @Builder
-    @Getter
-    private static class ErrorData {
+  private final ErrorData error;
 
-        private String timestamp;
-        private int code;
-        private String uuId;
-        private String message;
-    }
+  @Builder
+  @Getter
+  private static class ErrorData {
+
+    private String timestamp;
+    private int code;
+    private String uuId;
+    private String message;
+  }
 }
