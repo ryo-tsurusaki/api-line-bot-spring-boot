@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,20 +53,36 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
      * send OpenAI request.
      * @param message message string.
      * @return response stream.
-     * @throws IOException Internal server error.
      */
-    private BufferedReader sendRequest(String message) throws IOException {
-        URL obj = new URL(this.openAiChatConfig.getUrl());
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + this.openAiChatConfig.getApiKey());
-        con.setDoOutput(true);
+    private BufferedReader sendRequest(String message) {
 
-        OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
-        out.write("{\"model\": \"" + this.openAiChatConfig.getModel() + "\", \"messages\": [" + message + "]}");
-        out.close();
+        HttpURLConnection httpURLConnection = this.getHttpURLConnection();
 
-        return new BufferedReader(new InputStreamReader(con.getInputStream()));
+        try(OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream())) {
+            out.write("{\"model\": \"" + this.openAiChatConfig.getModel() + "\", \"messages\": [" + message + "]}");
+            return new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    /**
+     * get httpUrlConnection
+     * @return HttpURLConnection object.
+     */
+    private HttpURLConnection getHttpURLConnection() {
+
+        try {
+            URL url = new URL(this.openAiChatConfig.getUrl());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            httpURLConnection.setRequestProperty("Authorization", "Bearer " + this.openAiChatConfig.getApiKey());
+            httpURLConnection.setDoOutput(true);
+            return httpURLConnection;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 }
