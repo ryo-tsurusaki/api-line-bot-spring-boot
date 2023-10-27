@@ -61,8 +61,8 @@ public class OpenAIChatRepositoryImpl implements OpenAIChatRepository {
     con.setDoOutput(true);
 
     OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
-    out.write("{\"model\": \"" + this.openAiChatConfig.getModel() +
-        "\", \"messages\": [" + message + "]}");
+    out.write("{\"model\": \"" + this.openAiChatConfig.getModel()
+        + "\", \"messages\": [" + message + "]}");
     out.close();
 
     // TODO OutputStreamWriterをクローズする
