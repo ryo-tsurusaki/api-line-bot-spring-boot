@@ -23,7 +23,16 @@ LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返�
 |                | external    | 外部APIなど                                |
 |                | transfer    | 外部ストレージなど                              |
 
-### 起動時に必要な環境変数
+### 環境変数
+#### AWS Code Build
+| name               | value          |
+|--------------------|----------------|
+| AWS_DEFAULT_REGION | AWSのリージョン      |
+| AWS_ACCOUNT_ID     | AWSのアカウントID    |
+| IMAGE_REPO_NAME    | AWS ECRのリポジトリ名 |
+| IMAGE_TAG          | AWS ECRのイメージタグ |
+
+#### AWS App Runner / local
 | name                    | value                      |
 |-------------------------|----------------------------|
 | OPEN_AI_KEY             | OpenAIのAPIKey              |
