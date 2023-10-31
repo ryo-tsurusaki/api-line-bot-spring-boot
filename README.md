@@ -3,7 +3,7 @@ LINE DevelopersのWebhookに設定し、トーク内容をOpenAiを介して返�
 
 以下は、LINE Developersのチャンネル設定・OpenAIの利用登録・AWS App Runnerにデプロイし、Lineメッセージを送ったレスポンスサンプル。
 
-<img width="370" alt="image" src="https://github.com/ryo-tsurusaki/api-line-bot-spring-boot/assets/136481507/48880f02-9dde-4c8f-be44-4b00978ab1e3">
+<img width="373" alt="image" src="https://github.com/ryo-tsurusaki/line-bot-api/assets/136481507/c9c35a13-ebcc-4439-934d-863ccfb94072">
 
 
 ### package構成
